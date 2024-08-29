@@ -2,28 +2,28 @@ import os
 import pandas as pd
 from IPython.display import display, Audio, HTML
 
-# 파일 경로 설정
 audio_dir = './audio_files/'
 sex_file = 'sex.txt'
 
-# 성별 정보를 불러오기
 sex_info = pd.read_csv(sex_file, sep=' ', header=None, names=['num', 'spk1_sex', 'spk2_sex'])
 
-# HTML 테이블 생성을 위한 리스트
 rows = []
 
-# 성별 정보와 오디오 파일을 매칭하여 데모 생성
-for i in range(11):  # num은 0부터 10까지
-    # 오디오 파일 경로
+for i in range(10):  
     mix_file = os.path.join(audio_dir, f'batch{i}_mix.wav')
     recon_file = os.path.join(audio_dir, f'batch{i}_recon.wav')
     spk1_file = os.path.join(audio_dir, f'batch{i}_spk1.wav')
     
-    # 해당 num의 성별 정보
-    spk1_sex = sex_info.loc[sex_info['num'] == i, 'spk1_sex'].values[0]
-    spk2_sex = sex_info.loc[sex_info['num'] == i, 'spk2_sex'].values[0]
+    spk1_sex_row = sex_info.loc[sex_info['num'] == i, 'spk1_sex']
+    spk2_sex_row = sex_info.loc[sex_info['num'] == i, 'spk2_sex']
     
-    # HTML row 생성
+    if not spk1_sex_row.empty and not spk2_sex_row.empty:
+        spk1_sex = spk1_sex_row.values[0]
+        spk2_sex = spk2_sex_row.values[0]
+    else:
+        print(f"Warning: No gender information found for num={i}. Skipping this entry.")
+        continue 
+    
     row = f"""
     <tr>
         <td>{i}</td>
@@ -36,7 +36,6 @@ for i in range(11):  # num은 0부터 10까지
     """
     rows.append(row)
 
-# 전체 HTML 테이블 구성
 table_html = f"""
 <table border="1">
     <tr>
@@ -51,5 +50,6 @@ table_html = f"""
 </table>
 """
 
-# HTML 페이지 출력
 display(HTML(table_html))
+with open('demo.html', 'w') as f:
+    f.write(table_html)
