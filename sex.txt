@@ -1,0 +1,10 @@
+0 F F
+1 M F
+2 F F
+3 M F
+4 F F
+5 F M
+6 F F
+7 M M
+8 F F
+9 F F
