@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from IPython.display import display, Audio, HTML
+from IPython.display import display, HTML
 
 audio_dir = './audio_files/'
 sex_file = 'sex.txt'
@@ -22,34 +22,44 @@ for i in range(10):
         spk2_sex = spk2_sex_row.values[0]
     else:
         print(f"Warning: No gender information found for num={i}. Skipping this entry.")
-        continue 
+        continue  
     
     row = f"""
     <tr>
         <td>{i}</td>
         <td>{spk1_sex}</td>
         <td>{spk2_sex}</td>
-        <td>{Audio(mix_file).data}</td>
-        <td>{Audio(recon_file).data}</td>
-        <td>{Audio(spk1_file).data}</td>
+        <td><audio controls><source src="audio_files/batch{i}_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch{i}_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch{i}_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
     </tr>
     """
     rows.append(row)
 
 table_html = f"""
-<table border="1">
-    <tr>
-        <th>Num</th>
-        <th>Spk1 Sex</th>
-        <th>Spk2 Sex</th>
-        <th>Mixture</th>
-        <th>Predicted</th>
-        <th>GT</th>
-    </tr>
-    {''.join(rows)}
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speaker Separation Demo</title>
+</head>
+<body>
+    <h1>Speaker Separation Demo</h1>
+    <table border="1">
+        <tr>
+            <th>Num</th>
+            <th>Spk1 Sex</th>
+            <th>Spk2 Sex</th>
+            <th>Mixture</th>
+            <th>Predicted</th>
+            <th>GT</th>
+        </tr>
+        {''.join(rows)}
+    </table>
+</body>
+</html>
 """
 
-display(HTML(table_html))
-with open('demo.html', 'w') as f:
+with open('index.html', 'w') as f:
     f.write(table_html)
