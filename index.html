@@ -5,109 +5,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speaker Separation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        select {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Speaker Separation Demo</h1>
-    <table border="1">
-        <tr>
-            <th>Num</th>
-            <th>Spk1 Sex</th>
-            <th>Spk2 Sex</th>
-            <th>Mixture</th>
-            <th>Predicted</th>
-            <th>GT</th>
-        </tr>
-        
-    <tr>
-        <td>0</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch0_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch0_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch0_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>1</td>
-        <td>M</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch1_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch1_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch1_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>2</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch2_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch2_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch2_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>3</td>
-        <td>M</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch3_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch3_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch3_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>4</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch4_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch4_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch4_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>5</td>
-        <td>F</td>
-        <td>M</td>
-        <td><audio controls><source src="audio_files/batch5_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch5_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch5_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>6</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch6_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch6_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch6_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>7</td>
-        <td>M</td>
-        <td>M</td>
-        <td><audio controls><source src="audio_files/batch7_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch7_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch7_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>8</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch8_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch8_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch8_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
-    <tr>
-        <td>9</td>
-        <td>F</td>
-        <td>F</td>
-        <td><audio controls><source src="audio_files/batch9_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch9_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch9_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-    </tr>
-    
+    <label for="modelSelect">Select Model:</label>
+    <select id="modelSelect" onchange="updateTable()">
+        <option value="">Select a model</option>
+        <option value="audio_files">audio_files</option>
+        <option value=".git">.git</option>
+        <option value="cplx">cplx</option>
+    </select>
+
+    <table id="audioTable">
+        <thead>
+            <tr>
+                <th>Num</th>
+                <th>Spk1 Sex</th>
+                <th>Spk2 Sex</th>
+                <th>Mixture</th>
+                <th>Recon1</th>
+                <th>Spk1</th>
+                <th>Recon2</th>
+                <th>Spk2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="model-row" id="model-0" style="display:none">
+                <td>0</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-0">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-0">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-0">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-0">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-0">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-1" style="display:none">
+                <td>1</td>
+                <td>M</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-1">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-1">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-1">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-1">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-1">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-2" style="display:none">
+                <td>2</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-2">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-2">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-2">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-2">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-2">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-3" style="display:none">
+                <td>3</td>
+                <td>M</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-3">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-3">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-3">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-3">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-3">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-4" style="display:none">
+                <td>4</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-4">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-4">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-4">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-4">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-4">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-5" style="display:none">
+                <td>5</td>
+                <td>F</td>
+                <td>M</td>
+                <td><audio controls><source src="" id="mix-5">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-5">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-5">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-5">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-5">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-6" style="display:none">
+                <td>6</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-6">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-6">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-6">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-6">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-6">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-7" style="display:none">
+                <td>7</td>
+                <td>M</td>
+                <td>M</td>
+                <td><audio controls><source src="" id="mix-7">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-7">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-7">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-7">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-7">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-8" style="display:none">
+                <td>8</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-8">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-8">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-8">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-8">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-8">Your browser does not support the audio element.</audio></td>
+            </tr>
+            <tr class="model-row" id="model-9" style="display:none">
+                <td>9</td>
+                <td>F</td>
+                <td>F</td>
+                <td><audio controls><source src="" id="mix-9">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon1-9">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk1-9">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="recon2-9">Your browser does not support the audio element.</audio></td>
+                <td><audio controls><source src="" id="spk2-9">Your browser does not support the audio element.</audio></td>
+            </tr>
+        </tbody>
     </table>
+
+    <script>
+        const modelFolders = ['audio_files', '.git', 'cplx'];
+
+        function updateTable() {
+            const modelSelect = document.getElementById("modelSelect");
+            const selectedModel = modelSelect.value;
+
+            document.querySelectorAll(".model-row").forEach(row => {
+                row.style.display = selectedModel ? "" : "none";
+            });
+
+            if (selectedModel) {
+                for (let i = 0; i < 10; i++) {
+                    document.getElementById(`mix-${i}`).src = `${selectedModel}/batch${i}_mix.wav`;
+                    document.getElementById(`recon1-${i}`).src = `${selectedModel}/batch${i}_recon1.wav`;
+                    document.getElementById(`spk1-${i}`).src = `${selectedModel}/batch${i}_spk1.wav`;
+                    document.getElementById(`recon2-${i}`).src = `${selectedModel}/batch${i}_recon2.wav`;
+                    document.getElementById(`spk2-${i}`).src = `${selectedModel}/batch${i}_spk2.wav`;
+                }
+            }
+        }
+    </script>
 </body>
 </html>
