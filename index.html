@@ -1,132 +1,113 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speaker Separation Demo</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        audio {
-            width: 200px;
-        }
-    </style>
 </head>
 <body>
     <h1>Speaker Separation Demo</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Num</th>
-                <th>Speaker 1 Sex</th>
-                <th>Speaker 2 Sex</th>
-                <th>Mixture</th>
-                <th>Predicted</th>
-                <th>Ground Truth</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr>
-                <td>0</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch0_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch0_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch0_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>1</td>
-                <td>M</td>
-                <td>F</td>
-                <td><audio controls><source src="batch1_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch1_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch1_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>2</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch2_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch2_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch2_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>3</td>
-                <td>M</td>
-                <td>F</td>
-                <td><audio controls><source src="batch3_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch3_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch3_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>4</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch4_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch4_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch4_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>5</td>
-                <td>F</td>
-                <td>M</td>
-                <td><audio controls><source src="batch5_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch5_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch5_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>6</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch6_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch6_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch6_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>7</td>
-                <td>M</td>
-                <td>M</td>
-                <td><audio controls><source src="batch7_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch7_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch7_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>8</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch8_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch8_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch8_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-            <tr>
-                <td>9</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="batch9_mix.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch9_recon.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="batch9_spk1.wav" type="audio/wav"></audio></td>
-            </tr>
-            
-        </tbody>
+    <table border="1">
+        <tr>
+            <th>Num</th>
+            <th>Spk1 Sex</th>
+            <th>Spk2 Sex</th>
+            <th>Mixture</th>
+            <th>Predicted</th>
+            <th>GT</th>
+        </tr>
+        
+    <tr>
+        <td>0</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch0_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch0_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch0_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>1</td>
+        <td>M</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch1_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch1_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch1_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>2</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch2_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch2_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch2_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>3</td>
+        <td>M</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch3_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch3_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch3_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>4</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch4_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch4_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch4_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>5</td>
+        <td>F</td>
+        <td>M</td>
+        <td><audio controls><source src="audio_files/batch5_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch5_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch5_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>6</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch6_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch6_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch6_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>7</td>
+        <td>M</td>
+        <td>M</td>
+        <td><audio controls><source src="audio_files/batch7_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch7_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch7_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>8</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch8_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch8_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch8_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
+    <tr>
+        <td>9</td>
+        <td>F</td>
+        <td>F</td>
+        <td><audio controls><source src="audio_files/batch9_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch9_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch9_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+    </tr>
+    
     </table>
 </body>
 </html>
