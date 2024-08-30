@@ -29,7 +29,7 @@ for i in range(10):
         <td>{spk1_sex}</td>
         <td>{spk2_sex}</td>
         <td><audio controls><source src="audio_files/batch{i}_mix.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
-        <td><audio controls><source src="audio_files/batch{i}_recon.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
+        <td><audio controls><source src="audio_files/batch{i}_recon1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
         <td><audio controls><source src="audio_files/batch{i}_spk1.wav" type="audio/wav">Your browser does not support the audio element.</audio></td>
     </tr>
     """
