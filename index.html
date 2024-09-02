@@ -19,8 +19,8 @@
         <div class="container">
             <h1>Speaker Separation Demo</h1>
             <select id="modelSelect" onchange="loadAudioSamples()">
-                <option value="">Select a model</option>
-                <option value="audio_files">audio_files</option><option value=".git">.git</option><option value="cplx">cplx</option>
+                <option value="audio_files">audio_files</option>
+                <option value="cplx">cplx</option>
             </select>
             <div id="audioSamples"></div>
         </div>
@@ -61,12 +61,20 @@
                         audio.controls = true;
                         audio.src = content;
                         cell.appendChild(audio);
+
+                        // 오디오를 원터치로 재생 가능하도록 설정
+                        audio.addEventListener('canplaythrough', () => audio.play());
                     }
                 });
             }
 
             audioSamples.appendChild(table);
         }
+
+        // 페이지 로드 시 기본 폴더 선택 및 오디오 샘플 로드
+        window.onload = function() {
+            loadAudioSamples();
+        };
 
         const sexDict = {"0": ["F", "F"], "1": ["M", "F"], "2": ["F", "F"], "3": ["M", "F"], "4": ["F", "F"], "5": ["F", "M"], "6": ["F", "F"], "7": ["M", "M"], "8": ["F", "F"], "9": ["F", "F"]};
         </script>

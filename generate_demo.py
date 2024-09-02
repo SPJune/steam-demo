@@ -3,7 +3,7 @@ import json
 
 def generate_html():
     # 프로젝트 폴더 내의 모든 하위 폴더 찾기
-    model_folders = [f for f in os.listdir('.') if os.path.isdir(f)]
+    model_folders = [f for f in os.listdir('.') if os.path.isdir(f) and f != '.git']
 
     # sex.txt 파일 읽기
     sex_dict = {}
@@ -11,7 +11,6 @@ def generate_html():
         for line in f:
             num, spk1_sex, spk2_sex = line.strip().split()
             sex_dict[int(num)] = (spk1_sex, spk2_sex)
-
     html_content = """
     <!DOCTYPE html>
     <html lang="en">
@@ -33,8 +32,8 @@ def generate_html():
         <div class="container">
             <h1>Speaker Separation Demo</h1>
             <select id="modelSelect" onchange="loadAudioSamples()">
-                <option value="">Select a model</option>
-                """ + ''.join([f'<option value="{folder}">{folder}</option>' for folder in model_folders]) + """
+                <option value="audio_files">audio_files</option>
+                """ + ''.join([f'<option value="{folder}">{folder}</option>' for folder in model_folders if folder != 'audio_files']) + """
             </select>
             <div id="audioSamples"></div>
         </div>
@@ -75,12 +74,20 @@ def generate_html():
                         audio.controls = true;
                         audio.src = content;
                         cell.appendChild(audio);
+
+                        // 오디오를 원터치로 재생 가능하도록 설정
+                        audio.addEventListener('canplaythrough', () => audio.play());
                     }
                 });
             }
 
             audioSamples.appendChild(table);
         }
+
+        // 페이지 로드 시 기본 폴더 선택 및 오디오 샘플 로드
+        window.onload = function() {
+            loadAudioSamples();
+        };
 
         const sexDict = """ + json.dumps(sex_dict) + """;
         </script>
