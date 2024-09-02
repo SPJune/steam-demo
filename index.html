@@ -1,181 +1,75 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speaker Separation Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        select {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Speaker Separation Demo</h1>
-    <label for="modelSelect">Select Model:</label>
-    <select id="modelSelect" onchange="updateTable()">
-        <option value="">Select a model</option>
-        <option value="audio_files">audio_files</option>
-        <option value=".git">.git</option>
-        <option value="cplx">cplx</option>
-    </select>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Speaker Separation Demo</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+            select { margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            audio { width: 100%; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Speaker Separation Demo</h1>
+            <select id="modelSelect" onchange="loadAudioSamples()">
+                <option value="">Select a model</option>
+                <option value="audio_files">audio_files</option><option value=".git">.git</option><option value="cplx">cplx</option>
+            </select>
+            <div id="audioSamples"></div>
+        </div>
+        <script>
+        function loadAudioSamples() {
+            const modelName = document.getElementById('modelSelect').value;
+            const audioSamples = document.getElementById('audioSamples');
+            audioSamples.innerHTML = '';
 
-    <table id="audioTable">
-        <thead>
-            <tr>
-                <th>Num</th>
-                <th>Spk1 Sex</th>
-                <th>Spk2 Sex</th>
-                <th>Mixture</th>
-                <th>Recon1</th>
-                <th>Spk1</th>
-                <th>Recon2</th>
-                <th>Spk2</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="model-row" id="model-0" style="display:none">
-                <td>0</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-0">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-0">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-0">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-0">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-0">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-1" style="display:none">
-                <td>1</td>
-                <td>M</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-1">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-1">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-1">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-1">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-1">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-2" style="display:none">
-                <td>2</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-2">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-2">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-2">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-2">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-2">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-3" style="display:none">
-                <td>3</td>
-                <td>M</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-3">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-3">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-3">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-3">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-3">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-4" style="display:none">
-                <td>4</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-4">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-4">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-4">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-4">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-4">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-5" style="display:none">
-                <td>5</td>
-                <td>F</td>
-                <td>M</td>
-                <td><audio controls><source src="" id="mix-5">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-5">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-5">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-5">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-5">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-6" style="display:none">
-                <td>6</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-6">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-6">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-6">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-6">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-6">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-7" style="display:none">
-                <td>7</td>
-                <td>M</td>
-                <td>M</td>
-                <td><audio controls><source src="" id="mix-7">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-7">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-7">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-7">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-7">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-8" style="display:none">
-                <td>8</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-8">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-8">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-8">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-8">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-8">Your browser does not support the audio element.</audio></td>
-            </tr>
-            <tr class="model-row" id="model-9" style="display:none">
-                <td>9</td>
-                <td>F</td>
-                <td>F</td>
-                <td><audio controls><source src="" id="mix-9">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-9">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-9">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-9">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-9">Your browser does not support the audio element.</audio></td>
-            </tr>
-        </tbody>
-    </table>
+            if (!modelName) return;
 
-    <script>
-        const modelFolders = ['audio_files', '.git', 'cplx'];
-
-        function updateTable() {
-            const modelSelect = document.getElementById("modelSelect");
-            const selectedModel = modelSelect.value;
-
-            document.querySelectorAll(".model-row").forEach(row => {
-                row.style.display = selectedModel ? "" : "none";
+            const table = document.createElement('table');
+            const headerRow = table.insertRow();
+            ['Num', 'Spk1 Sex', 'Spk2 Sex', 'Mixture', 'Recon1', 'Spk1', 'Recon2', 'Spk2'].forEach(text => {
+                const th = document.createElement('th');
+                th.textContent = text;
+                headerRow.appendChild(th);
             });
 
-            if (selectedModel) {
-                for (let i = 0; i < 10; i++) {
-                    document.getElementById(`mix-${i}`).src = `${selectedModel}/batch${i}_mix.wav`;
-                    document.getElementById(`recon1-${i}`).src = `${selectedModel}/batch${i}_recon1.wav`;
-                    document.getElementById(`spk1-${i}`).src = `${selectedModel}/batch${i}_spk1.wav`;
-                    document.getElementById(`recon2-${i}`).src = `${selectedModel}/batch${i}_recon2.wav`;
-                    document.getElementById(`spk2-${i}`).src = `${selectedModel}/batch${i}_spk2.wav`;
-                }
+            for (let i = 0; i < 10; i++) {
+                const row = table.insertRow();
+                const sexInfo = sexDict[i];
+                [
+                    i,
+                    sexInfo[0],
+                    sexInfo[1],
+                    `${modelName}/batch${i}_mix.wav`,
+                    `${modelName}/batch${i}_recon1.wav`,
+                    `${modelName}/batch${i}_spk1.wav`,
+                    `${modelName}/batch${i}_recon2.wav`,
+                    `${modelName}/batch${i}_spk2.wav`
+                ].forEach((content, index) => {
+                    const cell = row.insertCell();
+                    if (index < 3) {
+                        cell.textContent = content;
+                    } else {
+                        const audio = document.createElement('audio');
+                        audio.controls = true;
+                        audio.src = content;
+                        cell.appendChild(audio);
+                    }
+                });
             }
+
+            audioSamples.appendChild(table);
         }
-    </script>
-</body>
-</html>
+
+        const sexDict = {"0": ["F", "F"], "1": ["M", "F"], "2": ["F", "F"], "3": ["M", "F"], "4": ["F", "F"], "5": ["F", "M"], "6": ["F", "F"], "7": ["M", "M"], "8": ["F", "F"], "9": ["F", "F"]};
+        </script>
+    </body>
+    </html>
+    

@@ -1,130 +1,96 @@
 import os
+import json
 
-project_folder = '.'
+def generate_html():
+    # 프로젝트 폴더 내의 모든 하위 폴더 찾기
+    model_folders = [f for f in os.listdir('.') if os.path.isdir(f)]
 
-def load_sex_info():
-    sex_info = {}
-    with open(os.path.join(project_folder, 'sex.txt'), 'r') as f:
+    # sex.txt 파일 읽기
+    sex_dict = {}
+    with open('sex.txt', 'r') as f:
         for line in f:
-            parts = line.strip().split()
-            num = int(parts[0])
-            sex_info[num] = (parts[1], parts[2])
-    return sex_info
+            num, spk1_sex, spk2_sex = line.strip().split()
+            sex_dict[int(num)] = (spk1_sex, spk2_sex)
 
-# 모델 폴더 탐색
-def get_model_folders():
-    return [f for f in os.listdir(project_folder) if os.path.isdir(os.path.join(project_folder, f))]
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Speaker Separation Demo</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+            select { margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            audio { width: 100%; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Speaker Separation Demo</h1>
+            <select id="modelSelect" onchange="loadAudioSamples()">
+                <option value="">Select a model</option>
+                """ + ''.join([f'<option value="{folder}">{folder}</option>' for folder in model_folders]) + """
+            </select>
+            <div id="audioSamples"></div>
+        </div>
+        <script>
+        function loadAudioSamples() {
+            const modelName = document.getElementById('modelSelect').value;
+            const audioSamples = document.getElementById('audioSamples');
+            audioSamples.innerHTML = '';
 
-# index.html 생성
-def create_index_html():
-    sex_info = load_sex_info()
-    model_folders = get_model_folders()
+            if (!modelName) return;
 
-    html_content = '''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speaker Separation Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        select {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Speaker Separation Demo</h1>
-    <label for="modelSelect">Select Model:</label>
-    <select id="modelSelect" onchange="updateTable()">
-        <option value="">Select a model</option>'''
-
-    # 모델 옵션 추가
-    for model in model_folders:
-        html_content += f'\n        <option value="{model}">{model}</option>'
-
-    html_content += '''
-    </select>
-
-    <table id="audioTable">
-        <thead>
-            <tr>
-                <th>Num</th>
-                <th>Spk1 Sex</th>
-                <th>Spk2 Sex</th>
-                <th>Mixture</th>
-                <th>Recon1</th>
-                <th>Spk1</th>
-                <th>Recon2</th>
-                <th>Spk2</th>
-            </tr>
-        </thead>
-        <tbody>'''
-
-    for i in range(10):
-        spk1_sex, spk2_sex = sex_info[i]
-        html_content += f'''
-            <tr class="model-row" id="model-{i}" style="display:none">
-                <td>{i}</td>
-                <td>{spk1_sex}</td>
-                <td>{spk2_sex}</td>
-                <td><audio controls><source src="" id="mix-{i}">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon1-{i}">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk1-{i}">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="recon2-{i}">Your browser does not support the audio element.</audio></td>
-                <td><audio controls><source src="" id="spk2-{i}">Your browser does not support the audio element.</audio></td>
-            </tr>'''
-
-    html_content += '''
-        </tbody>
-    </table>
-
-    <script>
-        const modelFolders = ''' + str(model_folders) + ''';
-
-        function updateTable() {
-            const modelSelect = document.getElementById("modelSelect");
-            const selectedModel = modelSelect.value;
-
-            document.querySelectorAll(".model-row").forEach(row => {
-                row.style.display = selectedModel ? "" : "none";
+            const table = document.createElement('table');
+            const headerRow = table.insertRow();
+            ['Num', 'Spk1 Sex', 'Spk2 Sex', 'Mixture', 'Recon1', 'Spk1', 'Recon2', 'Spk2'].forEach(text => {
+                const th = document.createElement('th');
+                th.textContent = text;
+                headerRow.appendChild(th);
             });
 
-            if (selectedModel) {
-                for (let i = 0; i < 10; i++) {
-                    document.getElementById(`mix-${i}`).src = `${selectedModel}/batch${i}_mix.wav`;
-                    document.getElementById(`recon1-${i}`).src = `${selectedModel}/batch${i}_recon1.wav`;
-                    document.getElementById(`spk1-${i}`).src = `${selectedModel}/batch${i}_spk1.wav`;
-                    document.getElementById(`recon2-${i}`).src = `${selectedModel}/batch${i}_recon2.wav`;
-                    document.getElementById(`spk2-${i}`).src = `${selectedModel}/batch${i}_spk2.wav`;
-                }
+            for (let i = 0; i < 10; i++) {
+                const row = table.insertRow();
+                const sexInfo = sexDict[i];
+                [
+                    i,
+                    sexInfo[0],
+                    sexInfo[1],
+                    `${modelName}/batch${i}_mix.wav`,
+                    `${modelName}/batch${i}_recon1.wav`,
+                    `${modelName}/batch${i}_spk1.wav`,
+                    `${modelName}/batch${i}_recon2.wav`,
+                    `${modelName}/batch${i}_spk2.wav`
+                ].forEach((content, index) => {
+                    const cell = row.insertCell();
+                    if (index < 3) {
+                        cell.textContent = content;
+                    } else {
+                        const audio = document.createElement('audio');
+                        audio.controls = true;
+                        audio.src = content;
+                        cell.appendChild(audio);
+                    }
+                });
             }
-        }
-    </script>
-</body>
-</html>'''
 
-    # index.html 파일로 저장
-    with open(os.path.join(project_folder, 'index.html'), 'w') as f:
+            audioSamples.appendChild(table);
+        }
+
+        const sexDict = """ + json.dumps(sex_dict) + """;
+        </script>
+    </body>
+    </html>
+    """
+
+    with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-# 스크립트 실행
 if __name__ == "__main__":
-    create_index_html()
+    generate_html()
+    print("index.html file has been generated successfully.")
